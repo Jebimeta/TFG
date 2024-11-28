@@ -30,6 +30,7 @@ public class Payment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "user")
-    private List<Payment> payments;
+    @ManyToOne
+    @JoinColumn(name = "payment_plan_id", nullable = false)
+    private PaymentPlan paymentPlan;
 }

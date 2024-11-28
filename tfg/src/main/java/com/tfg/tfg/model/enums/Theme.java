@@ -1,4 +1,4 @@
-package com.tfg.tfg.model;
+package com.tfg.tfg.model.enums;
 
 public enum Theme {
     DERECHOS_HUMANOS, IGUALDAD, PREVENCION_RIESGOS, CONSTITUCIONAL,

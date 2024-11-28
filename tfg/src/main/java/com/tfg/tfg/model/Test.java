@@ -1,6 +1,7 @@
 package com.tfg.tfg.model;
 
 
+import com.tfg.tfg.model.enums.Theme;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.tfg.tfg.model;
+package com.tfg.tfg.model.enums;
 
 public enum Rol {
     ADMIN, USER
