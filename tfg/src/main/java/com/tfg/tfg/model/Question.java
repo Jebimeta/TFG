@@ -1,13 +1,6 @@
 package com.tfg.tfg.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,13 +10,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pregunta {
+public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String enunciado;
+    @Column(name = "questions", nullable = false)
+    private String questionStatement;
 
     @Column(nullable = false)
     private String optionA;
@@ -32,10 +25,15 @@ public class Pregunta {
     private String optionD;
 
     @Column(nullable = false)
-    private String correctAnswer;
+    private String answer;
+
+    @Column(nullable = false)
+    private String explanation;
 
     @Enumerated(EnumType.STRING)
     private Theme theme;
 
-    // Constructor, getters, setters
+    @ManyToOne
+    @JoinColumn(name = "test_id", nullable = false, unique = true)
+    private Test test;
 }
