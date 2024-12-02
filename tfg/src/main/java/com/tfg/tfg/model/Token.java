@@ -1,7 +1,11 @@
 package com.tfg.tfg.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
+@Entity
+@Table(name = "token")
 public class Token {
 
     @Id

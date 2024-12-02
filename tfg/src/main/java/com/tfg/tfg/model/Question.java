@@ -1,5 +1,6 @@
 package com.tfg.tfg.model;
 
+import com.tfg.tfg.model.enums.Option;
 import com.tfg.tfg.model.enums.Theme;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -21,12 +22,21 @@ public class Question {
     @Column(name = "questions", nullable = false)
     private String questionStatement;
 
-    @NotBlank
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String optionA;
-    private String optionB;
-    private String optionC;
-    private String optionD;
+    private Option optionA;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Option optionB;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Option optionC;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Option optionD;
 
     @NotBlank
     @Column(nullable = false)
@@ -42,4 +52,8 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "test_id", nullable = false, unique = true)
     private Test test;
+
+    public boolean checkAnswer(Option selectedOption) {
+        return selectedOption.name().equals(this.answer);
+    }
 }

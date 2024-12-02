@@ -1,21 +1,19 @@
 package com.tfg.tfg.model;
 
-import com.tfg.tfg.model.enums.Theme;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "test")
-public class Test {
+@Table(name = "pdf_url")
+public class PdfUrl {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +24,7 @@ public class Test {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "theme_id", nullable = true)
-    private Theme theme;
-
-    @OneToMany(mappedBy = "test")
-    private List<Question> questions;
+    @NotBlank
+    @Column(name = "url", nullable = false)
+    private String url;
 }

@@ -1,0 +1,653 @@
+openapi: 3.0.3
+info:
+  title: OpositaWeb
+  description: Aplicación que se genera test para oposiciones
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Local server
+
+tags:
+  - name: auth
+    description: Controller para autenticacion
+  - name: user
+    description: Controller para usuarios
+  - name: question
+    description: Controller para las preguntas
+  - name: test
+    description: Controller para los test
+  - name: payment
+    description: Controller para los pagos
+  - name: about
+    description: Controlador para recibir mensajes por parte de usuarios
+    
+paths:
+
+  /users:
+    get:
+      summary: Obtener todos los usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Crear un nuevo usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Usuario creado
+
+  /users/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      summary: Actualizar un usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Usuario actualizado
+    delete:
+      summary: Eliminar un usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Usuario eliminado
+
+  /payments:
+    get:
+      summary: Obtener todos los pagos
+      responses:
+        '200':
+          description: Lista de pagos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Payment'
+    post:
+      summary: Crear un nuevo pago
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '201':
+          description: Pago creado
+
+  /payments/{id}:
+    get:
+      summary: Obtener un pago por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del pago
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+    put:
+      summary: Actualizar un pago
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+      responses:
+        '200':
+          description: Pago actualizado
+    delete:
+      summary: Eliminar un pago
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Pago eliminado
+
+  /payment-plans:
+    get:
+      summary: Obtener todos los planes de pago
+      responses:
+        '200':
+          description: Lista de planes de pago
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentPlan'
+    post:
+      summary: Crear un nuevo plan de pago
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlan'
+      responses:
+        '201':
+          description: Plan de pago creado
+
+  /payment-plans/{id}:
+    get:
+      summary: Obtener un plan de pago por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del plan de pago
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlan'
+    put:
+      summary: Actualizar un plan de pago
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlan'
+      responses:
+        '200':
+          description: Plan de pago actualizado
+    delete:
+      summary: Eliminar un plan de pago
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Plan de pago eliminado
+
+  /questions:
+    get:
+      summary: Obtener todas las preguntas
+      responses:
+        '200':
+          description: Lista de preguntas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+    post:
+      summary: Crear una nueva pregunta
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      responses:
+        '201':
+          description: Pregunta creada
+
+  /questions/{id}:
+    get:
+      summary: Obtener una pregunta por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles de la pregunta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+    put:
+      summary: Actualizar una pregunta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      responses:
+        '200':
+          description: Pregunta actualizada
+    delete:
+      summary: Eliminar una pregunta
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Pregunta eliminada
+
+  /tests:
+    get:
+      summary: Obtener todos los tests
+      responses:
+        '200':
+          description: Lista de tests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Test'
+    post:
+      summary: Crear un nuevo test
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Test'
+      responses:
+        '201':
+          description: Test creado
+
+  /tests/{id}:
+    get:
+      summary: Obtener un test por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles del test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+    put:
+      summary: Actualizar un test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Test'
+      responses:
+        '200':
+          description: Test actualizado
+    delete:
+      summary: Eliminar un test
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Test eliminado
+          
+  /pdf-urls:
+    get:
+      summary: Obtener todas las URLs de PDF
+      responses:
+        '200':
+          description: Lista de URLs de PDF
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PdfUrl'
+    post:
+      summary: Crear una nueva URL de PDF
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfUrl'
+      responses:
+        '201':
+          description: URL de PDF creada
+
+  /pdf-urls/{id}:
+    get:
+      summary: Obtener una URL de PDF por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalles de la URL de PDF
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PdfUrl'
+    put:
+      summary: Actualizar una URL de PDF
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfUrl'
+      responses:
+        '200':
+          description: URL de PDF actualizada
+    delete:
+      summary: Eliminar una URL de PDF
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: URL de PDF eliminada
+
+          
+components:
+  schemas:
+          
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Juan
+        lastNames:
+          type: string
+          example: Pérez
+        dni:
+          type: string
+          example: 12345678A
+        email:
+          type: string
+          example: juan.perez@example.com
+        password:
+          type: string
+          example: Password@123
+        telephone:
+          type: string
+          example: "123456789"
+        role:
+          type: string
+          enum:
+            - ADMIN
+            - USER
+          example: USER
+
+    Payment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        amount:
+          type: number
+          format: float
+          example: 100.5
+        paymentDate:
+          type: string
+          format: date-time
+          example: 2023-10-10T14:30:00Z
+        user:
+          $ref: '#/components/schemas/User'
+        paymentPlan:
+          $ref: '#/components/schemas/PaymentPlan'
+
+    PaymentPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        paymentType:
+          type: string
+          enum:
+            - MONTHLY
+            - HALF_YEAR
+            - ONE_YEAR
+          example: MONTHLY
+        price:
+          type: number
+          format: float
+          example: 29.99
+
+    Question:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        questionStatement:
+          type: string
+          example: ¿Cuál es la capital de Francia?
+        optionA:
+          type: string
+          example: París
+        optionB:
+          type: string
+          example: Madrid
+        optionC:
+          type: string
+          example: Berlín
+        optionD:
+          type: string
+          example: Roma
+        answer:
+          type: string
+          example: París
+        explanation:
+          type: string
+          example: París es la capital de Francia.
+        theme:
+          type: string
+          enum:
+            - DERECHOS_HUMANOS
+            - IGUALDAD
+            - PREVENCION_RIESGOS
+            - CONSTITUCIONAL
+            - UNION_EUROPEA
+            - INTERNACIONAL
+            - CIVIL
+            - PENAL
+            - PROCESAL_PENAL
+            - ADMINISTRATIVO
+            - PROTECCION_DATOS
+            - EXTRANJERIA
+            - SEGURIDAD_PUBLICA
+            - MINISTERIO
+            - FUERZAS_SEGURIDAD
+            - SOCIO_CULTURAL
+            - TECNICO_CIENTIFICAS
+            - TOPOGRAFIA
+            - DEONTOLOGIA
+            - PENAL_MENORES
+            - VIOLENCIA_GENERO
+            - ARMAS_EXPLOSIVOS
+            - FISCAL
+            - INGLES
+            - ESPANOL
+          example: CONSTITUCIONAL
+        test:
+          $ref: '#/components/schemas/Test'
+
+    Test:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Test de Matemáticas
+        theme:
+          type: string
+          enum:
+            - DERECHOS_HUMANOS
+            - IGUALDAD
+            - PREVENCION_RIESGOS
+            - CONSTITUCIONAL
+            - UNION_EUROPEA
+            - INTERNACIONAL
+            - CIVIL
+            - PENAL
+            - PROCESAL_PENAL
+            - ADMINISTRATIVO
+            - PROTECCION_DATOS
+            - EXTRANJERIA
+            - SEGURIDAD_PUBLICA
+            - MINISTERIO
+            - FUERZAS_SEGURIDAD
+            - SOCIO_CULTURAL
+            - TECNICO_CIENTIFICAS
+            - TOPOGRAFIA
+            - DEONTOLOGIA
+            - PENAL_MENORES
+            - VIOLENCIA_GENERO
+            - ARMAS_EXPLOSIVOS
+            - FISCAL
+            - INGLES
+            - ESPANOL
+          example: FUERZAS_SEGURIDAD
+        questions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+
+    Token:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        accessToken:
+          type: string
+          example: abc123
+        refreshToken:
+          type: string
+          example: def456
+        loggedOut:
+          type: boolean
+          example: false
+        user:
+          $ref: '#/components/schemas/User'
+          
+    PdfUrl:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: tema
+        url:
+          type: string
+          format: uri
+          example: "https://example.com/document.pdf"
